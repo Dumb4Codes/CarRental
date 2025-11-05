@@ -12,7 +12,7 @@ export function Model(props) {
   const speed = 0.003; // rotation speed
   const [hovered, setHovered] = useState(false);
 
-  // ✅ This ensures the model starts front-facing
+  // This ensures the model starts front-facing
   useEffect(() => {
     if (group.current) {
       // Flip the model 180° on Y so front faces camera
