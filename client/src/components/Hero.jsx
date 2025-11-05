@@ -2,6 +2,9 @@ import React, { useState } from "react";
 import { assets, cityList } from "../assets/assets";
 import { useAppContext } from "../context/AppContext";
 import { motion } from "motion/react";
+import { Model } from "./model/Model";
+import { Canvas } from "@react-three/fiber";
+import { OrbitControls } from "@react-three/drei";
 
 const Hero = () => {
   const [pickupLocation, setPickupLocation] = useState("");
@@ -24,13 +27,13 @@ const Hero = () => {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.8 }}
-      className="h-screen flex flex-col items-center justify-center gap-14 bg-light text-center"
+      className="h-screen flex flex-col items-center justify-center gap-14 bg-light text-center mb-5"
     >
       <motion.h1
         initial={{ y: 50, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.8, delay: 0.2 }}
-        className="text-4xl md:text-5xl font-semibold"
+        className="text-4xl md:text-5xl font-semibold mt-16"
       >
         Luxury cars on Rent
       </motion.h1>
@@ -45,6 +48,7 @@ const Hero = () => {
         <div className="flex flex-col md:flex-row items-start md:items-center gap-10 md:ml-8">
           <div className="flex flex-col items-start gap-2">
             <select
+              aria-label="Pickup location"
               required
               value={pickupLocation}
               onChange={(e) => setPickupLocation(e.target.value)}
@@ -99,14 +103,28 @@ const Hero = () => {
         </motion.button>
       </motion.form>
 
-      <motion.img
+      {/* <motion.img
         initial={{ y: 100, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.8, delay: 0.6 }}
         src={assets.main_car}
         alt="car"
         className="max-h-74"
-      />
+      /> */}
+
+      <motion.div
+        initial={{ y: 200, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        transition={{ duration: 1, delay: 0.7 }}
+        className="w-full h-full mt-0"
+      >
+        <Canvas shadows camera={{ position: [0, 0, 5], fov: 50 }}>
+          <ambientLight intensity={0.5} />
+          <directionalLight position={[10, 10, 5]} intensity={300} />
+          <OrbitControls enableZoom={false} />
+          <Model scale={0.0015} rotation={[0, Math.PI / 2, 0]} />
+        </Canvas>
+      </motion.div>
     </motion.div>
   );
 };

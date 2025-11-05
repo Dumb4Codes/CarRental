@@ -59,7 +59,7 @@ const Navbar = () => {
         <div className="hidden lg:flex items-center text-sm gap-2 border border-borderColor px-3 rounded-full max-w-56">
           <input
             type="text"
-            placeholder="Search products"
+            placeholder="Search cars"
             className="py-1.5 w-full bg-transparent outline-none placeholder-gray-500"
           />
           <img src={assets.search_icon} alt="search" />
